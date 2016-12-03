@@ -1,0 +1,38 @@
+report_dir: reports
+test:
+  phpcpd:
+    enable: true
+    ignore: true
+    command: phpcpd --log-pmd=reports/phpcpd.xml app
+  phpmd:
+    enable: true
+    ignore: true
+    command: phpmd app xml codesize --reportfile reports/phpmd.xml
+  pdepend:
+    enable: true
+    ignore: true
+    command: pdepend --summary-xml=reports/pdepend.xml
+        --jdepend-chart=reports/pdepend.svg
+        --overview-pyramid=reports/pyramid.svg
+  phpmetrics:
+    enable: true
+    ignore: true
+    command: phpmetrics --report-html=reports/metrics.html
+        --report-xml=reports/metrics.xml
+        app
+  eslint:
+    enable: true
+    ignore: false
+    command: eslint --format=checkstyle
+        --output-file=reports/eslint.xml
+        resources/assets/js/
+  phpcs:
+    enable: true
+    ignore: false
+    command: phpcs --standard=Framgia --report-xml=reports/phpcs.xml app
+  phpunit:
+    enable: true
+    ignore: false
+    command: php -dzend_extension=xdebug.so vendor/bin/phpunit
+        --coverage-clover=reports/coverage-clover.xml
+        --coverage-html=reports/coverage

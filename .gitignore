@@ -1,0 +1,6 @@
+.DS_Store
+build
+__pycache__
+.cache
+*.temp.yml
+*.spec
