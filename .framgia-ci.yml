@@ -1,3 +1,4 @@
+project_type: PHP
 report_dir: reports
 test:
   phpcpd:

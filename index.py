@@ -152,6 +152,8 @@ class RunReportCommand(Command):
     def handle(self):
         base_api_url = "http://ci-reports.framgia.vn/api/queues";
         params = self.buildParams();
+        params['project_type'] = ci_reports['project_type'] if 'project_type' in ci_reports else None
+        params['test_result'] = read_results()
         queue_id, token = self.createReportQueue(base_api_url, params)
         if queue_id:
             self.trackQueue(queue_id, token, base_api_url)
