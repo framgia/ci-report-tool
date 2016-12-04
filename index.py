@@ -92,7 +92,7 @@ class RunReportCommand(Command):
                 'number': os.environ.get('DRONE_BUILD_NUMBER'),
                 'commit': os.environ.get('DRONE_COMMIT'),
                 'branch': os.environ.get('DRONE_BRANCH'),
-                'pull_request_number': os.environ.get('DRONE_PULL_REQUEST')
+                'pull_request_number': os.getenv('DRONE_PULL_REQUEST', False)
             },
             'job': {
                 'number': os.environ.get('DRONE_JOB_NUMBER')
