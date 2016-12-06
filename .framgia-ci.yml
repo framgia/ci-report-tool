@@ -2,37 +2,32 @@ report_dir: .framgia-ci-reports
 
 test:
   phpcpd:
-    enable: true
     ignore: true
     command: phpcpd --log-pmd=.framgia-ci-reports/phpcpd.xml app
   phpmd:
-    enable: true
     ignore: true
     command: phpmd app xml codesize --reportfile .framgia-ci-reports/phpmd.xml
   pdepend:
-    enable: true
+    enable: false
     ignore: true
     command: pdepend --summary-xml=.framgia-ci-reports/pdepend.xml
         --jdepend-chart=.framgia-ci-reports/pdepend.svg
         --overview-pyramid=.framgia-ci-reports/pyramid.svg
   phpmetrics:
-    enable: true
     ignore: true
     command: phpmetrics --report-html=.framgia-ci-reports/metrics.html
         --report-xml=.framgia-ci-reports/metrics.xml
         app
   eslint:
-    enable: true
     ignore: false
     command: eslint --format=checkstyle
         --output-file=.framgia-ci-reports/eslint.xml
         resources/assets/js/
   phpcs:
-    enable: true
+    enable: false
     ignore: false
     command: phpcs --standard=Framgia --report-xml=.framgia-ci-reports/phpcs.xml app
   phpunit:
-    enable: true
     ignore: false
     command: php -dzend_extension=xdebug.so vendor/bin/phpunit
         --coverage-clover=.framgia-ci-reports/coverage-clover.xml

@@ -17,7 +17,7 @@ class RunTestCommand(Command):
             test_commands = self.app.ci_reports['test']
             results = {}
             for tool, options in test_commands.items():
-                if 'enable' in options and options['enable']:
+                if options.get('enable', True):
                     result = run_command(options['command'])
                     ignore = 'ignore' in options and options['ignore'] == True
                     results[tool] = {

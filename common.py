@@ -7,7 +7,7 @@ def get_exit_code(child):
 
 def run_command(command):
     try:
-        print("[+] Running: ", command)
+        print "[+] Running: ", command
         return os.system(command)
 
     except Exception as e:
