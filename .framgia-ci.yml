@@ -1,39 +1,39 @@
-project_type: PHP
-report_dir: reports
+report_dir: .framgia-ci-reports
+
 test:
   phpcpd:
     enable: true
     ignore: true
-    command: phpcpd --log-pmd=reports/phpcpd.xml app
+    command: phpcpd --log-pmd=.framgia-ci-reports/phpcpd.xml app
   phpmd:
     enable: true
     ignore: true
-    command: phpmd app xml codesize --reportfile reports/phpmd.xml
+    command: phpmd app xml codesize --reportfile .framgia-ci-reports/phpmd.xml
   pdepend:
     enable: true
     ignore: true
-    command: pdepend --summary-xml=reports/pdepend.xml
-        --jdepend-chart=reports/pdepend.svg
-        --overview-pyramid=reports/pyramid.svg
+    command: pdepend --summary-xml=.framgia-ci-reports/pdepend.xml
+        --jdepend-chart=.framgia-ci-reports/pdepend.svg
+        --overview-pyramid=.framgia-ci-reports/pyramid.svg
   phpmetrics:
     enable: true
     ignore: true
-    command: phpmetrics --report-html=reports/metrics.html
-        --report-xml=reports/metrics.xml
+    command: phpmetrics --report-html=.framgia-ci-reports/metrics.html
+        --report-xml=.framgia-ci-reports/metrics.xml
         app
   eslint:
     enable: true
     ignore: false
     command: eslint --format=checkstyle
-        --output-file=reports/eslint.xml
+        --output-file=.framgia-ci-reports/eslint.xml
         resources/assets/js/
   phpcs:
     enable: true
     ignore: false
-    command: phpcs --standard=Framgia --report-xml=reports/phpcs.xml app
+    command: phpcs --standard=Framgia --report-xml=.framgia-ci-reports/phpcs.xml app
   phpunit:
     enable: true
     ignore: false
     command: php -dzend_extension=xdebug.so vendor/bin/phpunit
-        --coverage-clover=reports/coverage-clover.xml
-        --coverage-html=reports/coverage
+        --coverage-clover=.framgia-ci-reports/coverage-clover.xml
+        --coverage-html=.framgia-ci-reports/coverage
