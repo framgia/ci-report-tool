@@ -1,0 +1,9 @@
+test:
+  checkstyle:
+    command: gradle :app:checkstyle
+  findbugs:
+    command: gradle :app:findbugs
+  pmd:
+    command: gradle :app:pmd
+  androidlint:
+    command: gradle :app:lintDebug
