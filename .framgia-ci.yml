@@ -2,8 +2,9 @@ report_dir: .framgia-ci-reports
 
 test:
   phpcpd:
-    ignore: true
-    command: phpcpd --log-pmd=.framgia-ci-reports/phpcpd.xml app
+    command:
+      - phpcpd --log-pmd=.framgia-ci-reports/phpcpd.xml app
+      - phpmd app xml codesize --reportfile .framgia-ci-reports/phpmd.xml
   phpmd:
     ignore: true
     command: phpmd app xml codesize --reportfile .framgia-ci-reports/phpmd.xml

@@ -18,11 +18,21 @@ class RunTestCommand(Command):
             results = {}
             for tool, options in test_commands.items():
                 if options.get('enable', True):
-                    result = run_command(options['command'])
-                    ignore = 'ignore' in options and options['ignore'] == True
+                    to_run_cmds = []
+                    if isinstance(options['command'], str):
+                        to_run_cmds.append(options['command'])
+                    elif isinstance(options['command'], list):
+                        to_run_cmds = options['command']
+
+                    general_result = 0
+                    for command in to_run_cmds:
+                        general_result = run_command(command)
+                        if general_result:
+                            break
+
                     results[tool] = {
-                        "exit_code": result,
-                        "ignore": ignore
+                        "exit_code": general_result,
+                        "ignore": options.get('ignore', False) == True
                     }
             write_results(results, self.app.temp_file_name)
             sys.exit(0)
