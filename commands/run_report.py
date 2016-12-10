@@ -81,7 +81,7 @@ class RunReportCommand(Command):
                 else:
                     print(i, " API check queue status failed!")
 
-            return False
+        return False
 
     def handle(self):
         base_api_url = self.app.ci_reports['url'] + "/api/queues"
