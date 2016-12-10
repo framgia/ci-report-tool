@@ -12,8 +12,8 @@ def run_command(command):
 
 
 def read_yaml_file(file):
-    f = open(file)
-    return yaml.load(f.read())
+    with open(file, "r") as f:
+        return yaml.load(f.read())
 
 
 def read_results(temp_file):

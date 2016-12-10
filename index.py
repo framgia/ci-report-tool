@@ -9,20 +9,22 @@ from commands.run_test import RunTestCommand
 from commands.init_template import InitTemplateCommand
 from commands.run_all import RunAllCommand
 from commands.check_config import CheckConfigCommand
+from commands.show_config import ShowConfigCommand
 
 YAML_CONFIGURE_FILE = '.framgia-ci.yml'
 RESULT_TEMP_FILE = '.framgia-ci-result.temp.yml'
 VERSION = '0.1.0'
 
+COMMANDS = [
+    RunTestCommand, RunReportCommand, RunFinishCommand, InitTemplateCommand,
+    CheckConfigCommand, ShowConfigCommand
+]
+
 if __name__ == '__main__':
     print('Framgia CI Report Tool', VERSION)
     app = ReportApplication()
     app.config(YAML_CONFIGURE_FILE, RESULT_TEMP_FILE)
-    app.register_command(RunTestCommand)
-    app.register_command(RunReportCommand)
-    app.register_command(RunFinishCommand)
-    app.register_command(InitTemplateCommand)
-    app.register_command(RunAllCommand)
-    app.register_command(CheckConfigCommand)
+    for command in COMMANDS:
+        app.register_command(command)
     app.run()
     sys.exit(0)
