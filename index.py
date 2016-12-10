@@ -8,6 +8,7 @@ from commands.run_report import RunReportCommand
 from commands.run_test import RunTestCommand
 from commands.init_template import InitTemplateCommand
 from commands.run_all import RunAllCommand
+from commands.check_config import CheckConfigCommand
 
 YAML_CONFIGURE_FILE = '.framgia-ci.yml'
 RESULT_TEMP_FILE = '.framgia-ci-result.temp.yml'
@@ -22,5 +23,6 @@ if __name__ == '__main__':
     app.register_command(RunFinishCommand)
     app.register_command(InitTemplateCommand)
     app.register_command(RunAllCommand)
+    app.register_command(CheckConfigCommand)
     app.run()
     sys.exit(0)
