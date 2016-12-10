@@ -23,4 +23,6 @@ class ReportApplication(Application):
         self.load_ci_reports()
 
     def load_ci_reports(self):
-        self.ci_reports = read_yaml_file(self.configure_file_name);
+        self.ci_reports = read_yaml_file(self.configure_file_name)
+        if 'url' not in self.ci_reports:
+            self.ci_reports['url'] = 'http://ci-reports.framgia.vn'

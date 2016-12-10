@@ -7,3 +7,4 @@ __pycache__
 *.spec
 *.pyc
 .python_history
+.framgia-ci-reports

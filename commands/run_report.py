@@ -84,7 +84,7 @@ class RunReportCommand(Command):
             return False
 
     def handle(self):
-        base_api_url = "http://ci-reports.framgia.vn/api/queues"
+        base_api_url = self.app.ci_reports['url'] + "/api/queues"
         params = self.build_params()
         queue_id, token = self.create_report_queue(base_api_url, params)
         if queue_id:

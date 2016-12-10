@@ -1,4 +1,5 @@
 import sys
+import os
 
 from cleo import Command
 
@@ -15,6 +16,7 @@ class RunTestCommand(Command):
     def handle(self):
         print_header("Running Test")
         if self.app.ci_reports['test']:
+            os.makedirs('.framgia-ci-reports', exist_ok=True)
             test_commands = self.app.ci_reports['test']
             results = {}
             for tool, options in test_commands.items():
