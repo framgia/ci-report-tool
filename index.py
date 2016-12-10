@@ -1,6 +1,7 @@
 #!/usr/local/bin/python
 # coding: utf-8
 
+import sys
 from report_app import ReportApplication
 from commands.run_finish import RunFinishCommand
 from commands.run_report import RunReportCommand
@@ -9,9 +10,10 @@ from commands.init_template import InitTemplateCommand
 
 YAML_CONFIGURE_FILE = '.framgia-ci.yml'
 RESULT_TEMP_FILE = '.framgia-ci-result.temp.yml'
+VERSION = '0.1.0'
 
 if __name__ == '__main__':
-    print("Framgia CI Report Tool")
+    print('Framgia CI Report Tool', VERSION)
     app = ReportApplication()
     app.config(YAML_CONFIGURE_FILE, RESULT_TEMP_FILE)
     app.register_command(RunTestCommand)
@@ -19,3 +21,4 @@ if __name__ == '__main__':
     app.register_command(RunFinishCommand)
     app.register_command(InitTemplateCommand)
     app.run()
+    sys.exit(0)

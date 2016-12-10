@@ -1,10 +1,11 @@
+import json
 import os
 import sys
 import time
-import json
-import requests
 
+import requests
 from cleo import Command
+
 
 class RunReportCommand(Command):
     """
@@ -12,6 +13,7 @@ class RunReportCommand(Command):
 
     report
     """
+
     def chmod_git_folder():
         os.system('chmod R 755 .git')
 
@@ -38,7 +40,7 @@ class RunReportCommand(Command):
         }
 
     def call_api(self, url, is_post=False, params={}, headers=[]):
-        print params, headers
+        print(params, headers)
         if is_post:
             r = requests.post(url, data=params, headers=headers)
         else:
@@ -52,7 +54,6 @@ class RunReportCommand(Command):
     def create_report_queue(self, base_api_url, params):
         print("[+] Creating Report Queue ... ")
         retry_time = 10
-        queue_id = None
         queue_id = None
         token = None
         for i in range(1, retry_time):
@@ -74,7 +75,7 @@ class RunReportCommand(Command):
             time.sleep(5)
             result = self.call_api(base_api_url + "/" + str(queue_id), False, {}, {'token:' + str(token)})
             if result and "errorCode" in result and not result["errorCode"]:
-                print result["data"]["status"], result["data"]['message']
+                print(result["data"]["status"], result["data"]['message'])
                 if "error" in result["data"] or "success" in result["data"]["status"]:
                     return True if result["data"]["status"] == "success" else False
                 else:
@@ -83,8 +84,8 @@ class RunReportCommand(Command):
             return False
 
     def handle(self):
-        base_api_url = "http://ci-reports.framgia.vn/api/queues";
-        params = self.build_params();
+        base_api_url = "http://ci-reports.framgia.vn/api/queues"
+        params = self.build_params()
         queue_id, token = self.create_report_queue(base_api_url, params)
         if queue_id:
             self.track_queue(queue_id, token, base_api_url)

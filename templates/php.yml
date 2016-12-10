@@ -8,21 +8,24 @@ test:
   pdepend:
     ignore: true
     command: pdepend --summary-xml=.framgia-ci-reports/pdepend.xml
-        --jdepend-chart=.framgia-ci-reports/pdepend.svg
-        --overview-pyramid=.framgia-ci-reports/pyramid.svg
-        app
+      --jdepend-chart=.framgia-ci-reports/pdepend.svg
+      --overview-pyramid=.framgia-ci-reports/pyramid.svg
+      app
   phpmetrics:
     ignore: true
     command: phpmetrics --report-html=.framgia-ci-reports/metrics.html
-        --report-xml=.framgia-ci-reports/metrics.xml
-        app
+      --report-xml=.framgia-ci-reports/metrics.xml
+      app
   eslint:
     command: eslint --format=checkstyle
-        --output-file=.framgia-ci-reports/eslint.xml
-        resources/assets/js/
+      --output-file=.framgia-ci-reports/eslint.xml
+      resources/assets/js/
   phpcs:
     command: phpcs --standard=Framgia --report-checkstyle=.framgia-ci-reports/phpcs.xml app
   phpunit:
-    command: sleep 30 && php artisan migrate --database=mysql_test && php -dzend_extension=xdebug.so vendor/bin/phpunit
+    command:
+      - sleep 30
+      - php artisan migrate --database=mysql_test
+      - php -dzend_extension=xdebug.so vendor/bin/phpunit
         --coverage-clover=.framgia-ci-reports/coverage-clover.xml
         --coverage-html=.framgia-ci-reports/coverage

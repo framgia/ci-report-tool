@@ -3,6 +3,7 @@ import sys
 
 from cleo import Command
 
+
 class InitTemplateCommand(Command):
     """
     Init new config file base-ed on template. Supported project type: php, ruby, android
@@ -18,7 +19,7 @@ class InitTemplateCommand(Command):
         else:
             if os.path.isfile(self.app.configure_file_name):
                 while True:
-                    answer = raw_input("Overwrite file (y/n) ?: ")
+                    answer = input("Overwrite file (y/n) ?: ")
                     if answer in ["y", "n"]:
                         break
                     else:

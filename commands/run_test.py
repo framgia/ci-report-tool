@@ -4,6 +4,7 @@ from cleo import Command
 
 from common import print_header, run_command, write_results
 
+
 class RunTestCommand(Command):
     """
     Running test tools

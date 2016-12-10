@@ -1,5 +1,4 @@
 import os
-
 from cleo import Application
 
 from common import read_yaml_file

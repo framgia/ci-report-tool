@@ -1,35 +1,17 @@
-report_dir: .framgia-ci-reports
-
 test:
-  phpcpd:
-    command:
-      - phpcpd --log-pmd=.framgia-ci-reports/phpcpd.xml app
-      - phpmd app xml codesize --reportfile .framgia-ci-reports/phpmd.xml
-  phpmd:
-    ignore: true
-    command: phpmd app xml codesize --reportfile .framgia-ci-reports/phpmd.xml
-  pdepend:
-    enable: false
-    ignore: true
-    command: pdepend --summary-xml=.framgia-ci-reports/pdepend.xml
-        --jdepend-chart=.framgia-ci-reports/pdepend.svg
-        --overview-pyramid=.framgia-ci-reports/pyramid.svg
-  phpmetrics:
-    ignore: true
-    command: phpmetrics --report-html=.framgia-ci-reports/metrics.html
-        --report-xml=.framgia-ci-reports/metrics.xml
-        app
+  bundle-audit:
+    command: bundle-audit --update | tee .framgia-ci-reports/bundle-audit.txt
+  rspec:
+    command: rspec --format html --out .framgia-ci-reports/rspec.html spec/
+  brakeman:
+    command: brakeman -o .framgia-ci-reports/brakeman.html -o .framgia-ci-reports/brakeman.json
+  reek:
+    command: reek --format html > .framgia-ci-reports/reek.html
+  rubocop:
+    command: bundle exec rubocop --require rubocop/formatter/checkstyle_formatter --format RuboCop::Formatter::CheckstyleFormatter --no-color --rails --out .framgia-ci-reports/rubocop.xml app/ lib/
+  scss-lint:
+    command: scss-lint --require=scss_lint_reporter_checkstyle --format=Checkstyle --out=.framgia-ci-reports/scss-lint.xml app/assets/stylesheets/
   eslint:
-    ignore: false
-    command: eslint --format=checkstyle
-        --output-file=.framgia-ci-reports/eslint.xml
-        resources/assets/js/
-  phpcs:
-    enable: false
-    ignore: false
-    command: phpcs --standard=Framgia --report-xml=.framgia-ci-reports/phpcs.xml app
-  phpunit:
-    ignore: false
-    command: php -dzend_extension=xdebug.so vendor/bin/phpunit
-        --coverage-clover=.framgia-ci-reports/coverage-clover.xml
-        --coverage-html=.framgia-ci-reports/coverage
+    command: rake eslint:run_all --format=checkstyle --output-file=.framgia-ci-reports/eslint.xml app/
+  rails_best_practices:
+    command: rails_best_practices --format html --output-file .framgia-ci-reports/rails_best_practices.html app/

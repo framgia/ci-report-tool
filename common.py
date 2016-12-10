@@ -1,13 +1,9 @@
 import os
 import yaml
 
-def get_exit_code(child):
-    return child.exitstatus if child.exitstatus != None else child.signalstatus
-
-
 def run_command(command):
     try:
-        print "[+] Running: ", command
+        print("[+] Running: ", command)
         return os.system(command)
 
     except Exception as e:

@@ -11,6 +11,7 @@ class RunFinishCommand(Command):
 
     finish
     """
+
     def handle(self):
         is_good_build = True
         result_text = ""
