@@ -35,6 +35,7 @@ class RunTestCommand(Command):
 
                     results[tool] = {
                         "exit_code": general_result,
+                        "comment": options.get('comment', True),
                         "ignore": options.get('ignore', False) == True
                     }
             write_results(results, self.app.temp_file_name)
