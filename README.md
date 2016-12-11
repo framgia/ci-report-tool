@@ -1,4 +1,12 @@
-# Framgia CI CLI Tool 0.1.3
+# Framgia CI CLI Tool
+
+[![PyPI](https://img.shields.io/pypi/v/framgia-ci.svg)](https://pypi.python.org/pypi/framgia-ci/)
+[![PyPI](https://img.shields.io/pypi/pyversions/framgia-ci.svg)]([![PyPI](https://img.shields.io/pypi/v/framgia-ci.svg)](https://pypi.python.org/pypi/framgia-ci/))
+[![PyPI](https://img.shields.io/pypi/status/framgia-ci.svg)](https://pypi.python.org/pypi/framgia-ci/)
+[![PyPI](https://img.shields.io/pypi/dm/framgia-ci.svg)](https://pypi.python.org/pypi/framgia-ci/)
+[![PyPI](https://img.shields.io/pypi/dw/framgia-ci.svg)](https://pypi.python.org/pypi/framgia-ci/)
+[![PyPI](https://img.shields.io/pypi/dd/framgia-ci.svg)](https://pypi.python.org/pypi/framgia-ci/)
+
 - A part of **Framgia CI** service
 - A tool for managing project configuration, as well as running test commands with **Framgia CI** Service
 - Written in Python
