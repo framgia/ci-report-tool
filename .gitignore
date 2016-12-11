@@ -8,3 +8,11 @@ __pycache__
 *.pyc
 .python_history
 .framgia-ci-reports
+*.egg-info/
+*.egg
+*.py[cod]
+__pycache__/
+*.so
+*~
+dist/*.tar.gz
+dist/*.egg
