@@ -14,7 +14,7 @@ class RunTestCommand(Command):
     """
 
     def handle(self):
-        print_header("Running Test")
+        print_header('Running Test')
         if self.app.ci_reports['test']:
             os.makedirs('.framgia-ci-reports', exist_ok=True)
             test_commands = self.app.ci_reports['test']
@@ -34,9 +34,9 @@ class RunTestCommand(Command):
                             break
 
                     results[tool] = {
-                        "exit_code": general_result,
-                        "comment": options.get('comment', True),
-                        "ignore": options.get('ignore', False) == True
+                        'exit_code': general_result,
+                        'comment': options.get('comment', True),
+                        'ignore': options.get('ignore', False) == True
                     }
             write_results(results, self.app.temp_file_name)
             sys.exit(0)

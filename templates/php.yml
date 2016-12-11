@@ -1,3 +1,4 @@
+project_type: php
 test:
   phpcpd:
     ignore: true

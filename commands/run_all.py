@@ -12,7 +12,11 @@ class RunAllCommand(Command):
     """
 
     def handle(self):
-        for command in ["test", "report", "finish"]:
-            self.call(command)
+        for command in ['test', 'report', 'finish']:
+            try:
+                self.call(command)
+            except SystemExit as exception:
+                if exception.code:
+                    sys.exit(exception.code)
 
         sys.exit(0)

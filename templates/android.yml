@@ -1,3 +1,4 @@
+project_type: android
 test:
   checkstyle:
     command: gradle :app:checkstyle

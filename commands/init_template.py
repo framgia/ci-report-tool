@@ -19,18 +19,18 @@ class InitTemplateCommand(Command):
         else:
             if os.path.isfile(self.app.configure_file_name):
                 while True:
-                    answer = input("Overwrite file (y/n) ?: ")
-                    if answer in ["y", "n"]:
+                    answer = input('Overwrite file (y/n) ?: ')
+                    if answer in ['y', 'n']:
                         break
                     else:
                         self.line("<comment>Please response 'y' or 'n'</comment>")
             else:
-                answer = "y"
+                answer = 'y'
 
-            if answer == "y":
+            if answer == 'y':
                 file_path = os.path.join(self.app.TEMPLATES_DIR, "%s.yml" % project_type)
-                with open(file_path, "r") as fin:
-                    with open(self.app.configure_file_name, "w") as fout:
+                with open(file_path, 'r') as fin:
+                    with open(self.app.configure_file_name, 'w') as fout:
                         fout.write(fin.read())
-                        self.line('<info>Wrote to file: %s</info>' % self.app.configure_file_name)
+                        self.line("<info>Wrote to file: %s</info>" % self.app.configure_file_name)
         sys.exit(0)

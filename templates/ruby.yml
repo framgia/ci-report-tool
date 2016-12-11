@@ -1,3 +1,4 @@
+project_type: ruby
 test:
   bundle-audit:
     command: bundle-audit --update | tee .framgia-ci-reports/bundle-audit.txt

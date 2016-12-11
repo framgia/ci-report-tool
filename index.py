@@ -17,7 +17,7 @@ VERSION = '0.1.0'
 
 COMMANDS = [
     RunTestCommand, RunReportCommand, RunFinishCommand, InitTemplateCommand,
-    CheckConfigCommand, ShowConfigCommand
+    CheckConfigCommand, ShowConfigCommand, RunAllCommand
 ]
 
 if __name__ == '__main__':

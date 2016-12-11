@@ -19,14 +19,14 @@ class CheckConfigCommand(Command):
     }
 
     def handle(self):
-        self.line("<info>Start checking...</info>")
+        self.line('<info>Start checking...</info>')
         try:
             raw = read_yaml_file(self.app.configure_file_name)
             if 'from' in raw and raw['from'] not in self.app.PROJ_TYPES:
                 self.line("<comment>Invalid project type '%s' !</comment>" % raw['from'])
             else:
                 if 'test' not in raw:
-                    self.line("<comment>No test block found !</comment>")
+                    self.line('<comment>No test block found !</comment>')
                 else:
                     for tool, config in raw['test'].items():
                         for key in config.keys():
@@ -44,4 +44,4 @@ class CheckConfigCommand(Command):
         except Exception as e:
             self.line("<comment>Error: %s</comment>" % e)
         finally:
-            self.line("<info>Done !</info>")
+            self.line('<info>Done ! Your configuration is OK</info>')
