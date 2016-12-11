@@ -66,6 +66,52 @@ framgia-ci test
 framgia-ci run
 ```
 
+## Framgia CI Configuration
+- All additional configurations for Framgia CI Service **MUST** be stored in `.framgia-ci.yml` file.
+- The configurations have to be written in `yaml` format.
+- Example configuration file:
+```
+project_type: php
+test:
+  phpcpd:
+    ignore: true
+    command: phpcpd --log-pmd=.framgia-ci-reports/phpcpd.xml app
+  phpmd:
+    ignore: true
+    command: phpmd app xml
+      cleancode,codesize,controversial,design,naming,unusedcode --reportfile .framgia-ci-reports/phpmd.xml
+  pdepend:
+    ignore: true
+    command: pdepend --summary-xml=.framgia-ci-reports/pdepend.xml
+      --jdepend-chart=.framgia-ci-reports/pdepend.svg
+      --overview-pyramid=.framgia-ci-reports/pyramid.svg
+      app
+  phpmetrics:
+    ignore: true
+    command: phpmetrics --report-html=.framgia-ci-reports/metrics.html
+      --report-xml=.framgia-ci-reports/metrics.xml
+      app
+  eslint:
+    command: eslint --format=checkstyle
+      --output-file=.framgia-ci-reports/eslint.xml
+      resources/assets/js/
+  phpcs:
+    command: phpcs --standard=Framgia --report-checkstyle=.framgia-ci-reports/phpcs.xml app
+  phpunit:
+    command:
+      - sleep 30
+      - php artisan migrate --database=mysql_test
+      - php -dzend_extension=xdebug.so vendor/bin/phpunit
+        --coverage-clover=.framgia-ci-reports/coverage-clover.xml
+        --coverage-html=.framgia-ci-reports/coverage
+```
+- `project_type` key: Define the type of the project. Currently supports `php`, `ruby` and `android`. This key is **required**
+- `test` key: Define test section with customizable commands. This section is **required**
+- `phpcpd`, `phpmd`, `phpcs`, `phpunit` ...: Configuration for each test tools. All of them will be executed, even if the other test tools are success or not.
+- `ignore` key: Define whether the build should be considered as `failed` or not when the test tool is failed. The default value is `false`. If you set it to `true`, the build will be considered as success even when the command returns `false` (with non-zero `exit code`)
+- `command`: The section that defines command(s) that are expected to be run. If there are more than one commands in this section, `framgia-ci` will try to run them in the order from top to bottom. However, if one of them is failed, the entire section will be stopped, and the below commands will not be executed.
+- All the reports file (if existed) **MUST** be exported to a folder named `.framgia-ci-reports`
+
 Contribution
 --------------
 View contribution guidelines [here](./CONTRIBUTING.md)
