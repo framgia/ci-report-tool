@@ -42,6 +42,7 @@ class ReportApplication(Application):
             base = read_template_file(self.TEMPLATES_DIR, raw['from'])
             final = {'from': raw['from']}
             final['test'] = merge_test_config(base['test'], raw['test'] if 'test' in raw else {})
+            final['project_type'] = raw['project_type'] if 'project_type' in raw else base['project_type']
 
             return final
         else:

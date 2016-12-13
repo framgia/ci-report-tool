@@ -36,6 +36,6 @@ class InitTemplateCommand(Command):
                             fout.write("from: %s" % project_type)
                         else:
                             fout.write(fin.read())
-                            self.line("<info>Wrote to file: %s</info>" % self.app.configure_file_name)
+                        self.line("<info>Wrote to file: %s</info>" % self.app.configure_file_name)
 
         sys.exit(0)
