@@ -19,6 +19,7 @@ setup(
     url = 'http://ci-reports.framgia.vn',
     classifiers=[
         # Indicate who your project is intended for
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Build Tools',
 

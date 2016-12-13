@@ -27,7 +27,11 @@ wget -O /usr/bin/framgia-ci https://raw.githubusercontent.com/framgia/ci-report-
 - Requirement: **python 3.5**
 - Command:
 ```
+// Install
 pip install framgia-ci
+
+// Update
+pip install --upgrade framgia-ci
 ```
 
 ### Mac OS
@@ -40,6 +44,9 @@ brew install python3
 
 // Install framgia-ci
 pip3 install framgia-ci
+
+// Update
+pip3 install --upgrade framgia-ci
 ```
 
 ## Usage
