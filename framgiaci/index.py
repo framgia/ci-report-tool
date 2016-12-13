@@ -15,7 +15,7 @@ from framgiaci.commands.run_notify import RunNotifyCommand
 
 YAML_CONFIGURE_FILE = '.framgia-ci.yml'
 RESULT_TEMP_FILE = '.framgia-ci-result.temp.yml'
-VERSION = pkg_resources.require('framgia-ci')[0].version
+VERSION = '0.1.4'
 
 COMMANDS = [
     RunTestCommand, RunReportCommand, RunFinishCommand, InitTemplateCommand,
