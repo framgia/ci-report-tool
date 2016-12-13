@@ -2,7 +2,7 @@ import os
 import sys
 from cleo import Application
 
-from framgiaci.common import read_yaml_file
+from framgiaci.common import read_yaml_file, read_template_file, merge_test_config
 
 class ReportApplication(Application):
 
@@ -22,7 +22,6 @@ class ReportApplication(Application):
             print('.framgia-ci.yml file does not exists')
             sys.exit(1)
 
-
     def config(self, configure_file_name, temp_file_name):
         self.configure_file_name = configure_file_name
         self.temp_file_name = temp_file_name
@@ -30,32 +29,17 @@ class ReportApplication(Application):
             self.load_ci_reports()
 
     def load_ci_reports(self):
-        self.ci_reports = self.parse_ci_config()
-        if 'url' not in self.ci_reports:
-            self.ci_reports['url'] = 'http://ci-reports.framgia.vn'
+        if len(sys.argv) == 2  and sys.argv[1] != 'check-config':
+            self.ci_reports = self.parse_ci_config()
+            if 'url' not in self.ci_reports:
+                self.ci_reports['url'] = 'http://ci-reports.framgia.vn'
 
     def parse_ci_config(self):
         raw = read_yaml_file(self.configure_file_name)
         if 'from' in raw:
-            template_file = os.path.join(self.TEMPLATES_DIR, "%s.yml" % raw['from'])
-            base = read_yaml_file(template_file)
-            defaults = {
-                'comment': True,
-                'ignore': False,
-                'enable': True
-            }
+            base = read_template_file(self.TEMPLATES_DIR, raw['from'])
             final = {'from': raw['from']}
-            final['test'] = {}
-            merged_tools = [key for key in raw['test'].keys()] + [key for key in base['test'].keys()]
-            merged_tools = list(set(merged_tools))
-            for tool in merged_tools:
-                if tool not in raw['test']:
-                    final['test'][tool] = base['test'][tool]
-                else:
-                    final['test'][tool] = {}
-                    for key, value in defaults.items():
-                        final['test'][tool][key] = raw['test'][tool].get(key, base['test'][tool].get(key, defaults[key]))
-                    final['test'][tool]['command'] = raw['test'][tool].get('command', base['test'][tool]['command'])
+            final['test'] = merge_test_config(base['test'], raw['test'] if 'test' in raw else {})
 
             return final
         else:
