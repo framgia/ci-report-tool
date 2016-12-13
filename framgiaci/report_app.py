@@ -29,7 +29,9 @@ class ReportApplication(Application):
             self.load_ci_reports()
 
     def load_ci_reports(self):
-        if len(sys.argv) == 2  and sys.argv[1] != 'check-config':
+        if len(sys.argv) == 2 and sys.argv[1] == 'check-config':
+            pass
+        else:
             self.ci_reports = self.parse_ci_config()
             if 'url' not in self.ci_reports:
                 self.ci_reports['url'] = 'http://ci-reports.framgia.vn'
