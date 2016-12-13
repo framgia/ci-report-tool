@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """setup.py: setuptools control."""
-import re
 from setuptools import setup
 
 version = '0.1.3'

@@ -1,5 +1,6 @@
 import os
 import yaml
+import sys
 
 def run_command(command):
     try:

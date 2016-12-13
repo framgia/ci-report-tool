@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import sys
+import pkg_resources
 from framgiaci.report_app import ReportApplication
 from framgiaci.commands.run_finish import RunFinishCommand
 from framgiaci.commands.run_report import RunReportCommand
@@ -13,7 +14,7 @@ from framgiaci.commands.show_config import ShowConfigCommand
 
 YAML_CONFIGURE_FILE = '.framgia-ci.yml'
 RESULT_TEMP_FILE = '.framgia-ci-result.temp.yml'
-VERSION = '0.1.3'
+VERSION = pkg_resources.require("framgia-ci")[0].version
 
 COMMANDS = [
     RunTestCommand, RunReportCommand, RunFinishCommand, InitTemplateCommand,
