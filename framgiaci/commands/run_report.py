@@ -8,7 +8,7 @@ from framgiaci.common import read_results, print_header, call_api, build_params
 
 class RunReportCommand(Command):
     """
-    Running report command to send request to CI Report service
+    Running report command to send copying request to CI Report service
 
     report
     """

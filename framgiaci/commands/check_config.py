@@ -51,4 +51,4 @@ class CheckConfigCommand(Command):
         except Exception as e:
             self.line("<comment>Error: %s</comment>" % e)
         finally:
-            self.line('<info>Done !</info>')
+            self.line('<info>Done! Your configuration is valid!</info>')

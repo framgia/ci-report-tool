@@ -48,8 +48,10 @@ pip3 install framgia-ci
 check-config  Validate config file
 finish        Running finish command tools
 init          Init new config file base-ed on template. Supported project type: php, ruby, android
-report        Running report command to send request to CI Report service
+report        Running report command to send copying request to CI Report service
+notify        Running notify command to send notify request to CI Report service
 run           Running test, report, finish command
+run --local   Running test, finish command. For running at local machine
 show-config   Display current config
 test          Running test tools
 ```
@@ -64,6 +66,9 @@ framgia-ci test
 
 // Run all test, report, finish commands. This should only be run inside framgia ci service
 framgia-ci run
+
+// Run test and show results at local machine
+framgia-ci run --local
 ```
 
 ## Framgia CI Configuration
@@ -111,6 +116,13 @@ test:
 - `ignore` key: Define whether the build should be considered as `failed` or not when the test tool is failed. The default value is `false`. If you set it to `true`, the build will be considered as success even when the command returns `false` (with non-zero `exit code`)
 - `command`: The section that defines command(s) that are expected to be run. If there are more than one commands in this section, `framgia-ci` will try to run them in the order from top to bottom. However, if one of them is failed, the entire section will be stopped, and the below commands will not be executed.
 - All the reports file (if existed) **MUST** be exported to a folder named `.framgia-ci-reports`
+- You can also use `from` keyword to extend from default template. For example:
+```
+from: php
+test:
+  phpcs:
+    ignore: true # Extend the default configuration from php template, but override the ignore property for phpcs tool
+```
 
 Contribution
 --------------
