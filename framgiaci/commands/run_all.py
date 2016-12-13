@@ -9,11 +9,15 @@ class RunAllCommand(Command):
     Running test, report, finish command
 
     run
+        {--local : run test and finish only}
     """
 
     def handle(self):
         self.app.check_configure_file_exists()
-        for command in ['test', 'report', 'finish']:
+        commands = ['test', 'report', 'finish']
+        if self.option('local'):
+            commands.remove('report')
+        for command in commands:
             try:
                 self.call(command)
             except SystemExit as exception:
