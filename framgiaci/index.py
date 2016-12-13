@@ -11,6 +11,7 @@ from framgiaci.commands.init_template import InitTemplateCommand
 from framgiaci.commands.run_all import RunAllCommand
 from framgiaci.commands.check_config import CheckConfigCommand
 from framgiaci.commands.show_config import ShowConfigCommand
+from framgiaci.commands.run_notify import RunNotifyCommand
 
 YAML_CONFIGURE_FILE = '.framgia-ci.yml'
 RESULT_TEMP_FILE = '.framgia-ci-result.temp.yml'
@@ -18,7 +19,7 @@ VERSION = pkg_resources.require("framgia-ci")[0].version
 
 COMMANDS = [
     RunTestCommand, RunReportCommand, RunFinishCommand, InitTemplateCommand,
-    CheckConfigCommand, ShowConfigCommand, RunAllCommand
+    CheckConfigCommand, ShowConfigCommand, RunAllCommand, RunNotifyCommand
 ]
 
 def main():

@@ -1,6 +1,10 @@
 import os
 import yaml
 import sys
+import pycurl
+import json
+
+from io import BytesIO
 
 def run_command(command):
     try:
@@ -61,3 +65,46 @@ def merge_test_config(base, overwrite):
                 result[tool][key] = overwrite[tool][key]
 
     return result
+
+def build_params():
+    repo = os.environ.get('DRONE_REPO').split('/')
+    return {
+        'workspace': {
+            'path': os.environ.get('DRONE_DIR')
+        },
+        'repo': {
+            'owner': repo[0],
+            'name': repo[1],
+            'full_name': os.environ.get('DRONE_REPO')
+        },
+        'build': {
+            'number': os.environ.get('DRONE_BUILD_NUMBER'),
+            'commit': os.environ.get('DRONE_COMMIT'),
+            'branch': os.environ.get('DRONE_BRANCH'),
+            'pull_request_number': os.environ.get('DRONE_PULL_REQUEST')
+        },
+        'job': {
+            'number': os.environ.get('DRONE_JOB_NUMBER')
+        }
+    }
+
+def call_api(url, is_post=False, params={}, headers=[]):
+    buffer = BytesIO()
+    c = pycurl.Curl()
+    c.setopt(c.URL, url)
+    c.setopt(c.WRITEDATA, buffer)
+    if is_post:
+        postfields = json.dumps(params)
+        c.setopt(c.POSTFIELDS, postfields)
+    if headers != []:
+        c.setopt(c.HTTPHEADER, headers)
+
+    c.perform()
+    c.close()
+
+    body = buffer.getvalue()
+    body = body.decode('iso-8859-1')
+    try:
+        return json.loads(body)
+    except Exception:
+        return {'errorCode': 'Server Error !'}
