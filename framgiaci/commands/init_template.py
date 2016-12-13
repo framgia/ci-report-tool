@@ -10,6 +10,7 @@ class InitTemplateCommand(Command):
 
     init
         {project_type : Supported project type}
+        {--short : create compact init file}
     """
 
     def handle(self):
@@ -31,6 +32,10 @@ class InitTemplateCommand(Command):
                 file_path = os.path.join(self.app.TEMPLATES_DIR, "%s.yml" % project_type)
                 with open(file_path, 'r') as fin:
                     with open(self.app.configure_file_name, 'w') as fout:
-                        fout.write(fin.read())
-                        self.line("<info>Wrote to file: %s</info>" % self.app.configure_file_name)
+                        if self.option('short'):
+                            fout.write("from: %s" % project_type)
+                        else:
+                            fout.write(fin.read())
+                            self.line("<info>Wrote to file: %s</info>" % self.app.configure_file_name)
+
         sys.exit(0)
