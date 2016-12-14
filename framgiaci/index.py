@@ -2,7 +2,7 @@
 # coding: utf-8
 
 import sys
-import pkg_resources
+from framgiaci.version import __version__
 from framgiaci.report_app import ReportApplication
 from framgiaci.commands.run_finish import RunFinishCommand
 from framgiaci.commands.run_report import RunReportCommand
@@ -15,7 +15,6 @@ from framgiaci.commands.run_notify import RunNotifyCommand
 
 YAML_CONFIGURE_FILE = '.framgia-ci.yml'
 RESULT_TEMP_FILE = '.framgia-ci-result.temp.yml'
-VERSION = '0.1.4'
 
 COMMANDS = [
     RunTestCommand, RunReportCommand, RunFinishCommand, InitTemplateCommand,
@@ -23,7 +22,7 @@ COMMANDS = [
 ]
 
 def main():
-    print('Framgia CI Report Tool', VERSION)
+    print('Framgia CI Report Tool', __version__)
     app = ReportApplication()
     app.config(YAML_CONFIGURE_FILE, RESULT_TEMP_FILE)
     for command in COMMANDS:

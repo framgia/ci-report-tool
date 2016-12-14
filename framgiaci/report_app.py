@@ -7,7 +7,7 @@ from framgiaci.common import read_yaml_file, read_template_file, merge_test_conf
 class ReportApplication(Application):
 
     PROJ_TYPES = ['php', 'ruby', 'android']
-    TEMPLATES_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'templates')
+    TEMPLATES_DIR = 'templates'
 
     def __init__(self, *args, **kwargs):
         super(ReportApplication, self).__init__()

@@ -2,7 +2,7 @@ import os
 import sys
 
 from cleo import Command
-
+from framgiaci.common import buid_template_file_path
 
 class InitTemplateCommand(Command):
     """
@@ -29,8 +29,7 @@ class InitTemplateCommand(Command):
                 answer = 'y'
 
             if answer == 'y':
-                file_path = os.path.join(self.app.TEMPLATES_DIR, "%s.yml" % project_type)
-                with open(file_path, 'r') as fin:
+                with open(buid_template_file_path(self.app.TEMPLATES_DIR, project_type), 'r') as fin:
                     with open(self.app.configure_file_name, 'w') as fout:
                         if self.option('short'):
                             fout.write("from: %s" % project_type)

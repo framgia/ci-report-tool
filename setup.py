@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 """setup.py: setuptools control."""
-from setuptools import setup
+from setuptools import setup, find_packages
+from distutils.util import convert_path
 
-version = '0.1.4'
+main_ns = {}
+with open(convert_path('framgiaci/version.py')) as ver_file:
+    exec(ver_file.read(), main_ns)
 
 setup(
     name = 'framgia-ci',
@@ -12,7 +15,7 @@ setup(
         'console_scripts': ['framgia-ci=framgiaci.index:main']
     },
     package_data={'framgiaci': ['templates/*']},
-    version = version,
+    version = main_ns['__version__'],
     description = 'Command Line Tool for Framgia CI service written in Python',
     author = 'ThangTD and TienNA @Framgia Vietnam CI/CD Team',
     author_email = 'tran.duc.thang@framgia.com',

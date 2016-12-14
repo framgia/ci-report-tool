@@ -39,10 +39,21 @@ def print_header(text):
     print(text)
     print("------------------------------------------\n")
 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    if getattr(sys, 'frozen', False):
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.dirname(os.path.realpath(__file__))
+
+    return os.path.join(base_path, relative_path)
+
+def buid_template_file_path(template_dir, file_name):
+    return os.path.join(resource_path(template_dir), "%s.yml" % file_name)
 
 def read_template_file(template_dir, file_name):
-    template_file = os.path.join(template_dir, "%s.yml" % file_name)
-    return read_yaml_file(template_file)
+    return read_yaml_file(buid_template_file_path(template_dir, file_name))
 
 def merge_test_config(base, overwrite):
     result = {}
