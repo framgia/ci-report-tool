@@ -56,6 +56,8 @@ def read_template_file(template_dir, file_name):
     return read_yaml_file(buid_template_file_path(template_dir, file_name))
 
 def merge_test_config(base, overwrite):
+    if not base:
+        return overwrite
     result = {}
     merged_tools = [key for key in overwrite.keys()] + [key for key in base.keys()]
     merged_tools = list(set(merged_tools))

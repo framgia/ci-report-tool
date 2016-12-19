@@ -22,6 +22,9 @@ class CheckConfigCommand(Command):
         self.line('<info>Start checking...</info>')
         try:
             raw = read_yaml_file(self.app.configure_file_name)
+            if 'project_type' not in raw:
+                self.line("<comment>No project_type block found !</comment>")
+
             if 'from' in raw and raw['from'] not in self.app.PROJ_TYPES:
                 self.line("<comment>Invalid project type '%s' !</comment>" % raw['from'])
             else:
