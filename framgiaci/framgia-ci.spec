@@ -4,9 +4,9 @@ block_cipher = None
 
 
 a = Analysis(['index.py'],
-             pathex=['.'],
+             pathex=['/compile/framgiaci'],
              binaries=None,
-             datas=[('templates/*.yml', 'templates')],
+             datas=None,
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
