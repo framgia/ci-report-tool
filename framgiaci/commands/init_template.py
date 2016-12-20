@@ -6,7 +6,7 @@ from framgiaci.common import buid_template_file_path
 
 class InitTemplateCommand(Command):
     """
-    Init new config file base-ed on template. Supported project type: php, ruby, android
+    Init new config file base-ed on template. Supported project type: php, ruby, android, ios
 
     init
         {project_type : Supported project type}

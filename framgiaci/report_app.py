@@ -6,7 +6,7 @@ from framgiaci.common import read_yaml_file, read_template_file, merge_test_conf
 
 class ReportApplication(Application):
 
-    PROJ_TYPES = ['php', 'ruby', 'android']
+    PROJ_TYPES = ['php', 'ruby', 'android', 'ios']
     TEMPLATES_DIR = 'templates'
 
     def __init__(self, *args, **kwargs):

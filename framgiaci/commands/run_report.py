@@ -43,11 +43,11 @@ class RunReportCommand(Command):
             time.sleep(5)
             result = call_api(base_api_url + '/' + str(queue_id), False, {}, ['token:' + str(token)])
             if result and 'errorCode' in result and not result['errorCode']:
-                print(result['data']['status'], result['data']['message'])
                 if 'error' in result['data'] or 'success' in result['data']['status']:
                     return True if result['data']['status'] == 'success' else False
                 else:
                     print(i, 'API check queue status failed!')
+                    print(result['data']['status'], result['data']['message'])
                     if ('message' in result):
                         print(result['message'])
 
