@@ -58,6 +58,7 @@ run           Running test, report, finish command
 run --local   Running test, finish command. For running at local machine
 show-config   Display current config
 test          Running test tools
+test-connect  Test connection to specific host and port
 ```
 
 For example
@@ -73,6 +74,9 @@ framgia-ci run
 
 // Run test and show results at local machine
 framgia-ci run --local
+
+// Check mysql connection in localhost
+framgia-ci test-connect 127.0.0.1 3306
 ```
 
 ## Framgia CI Configuration
