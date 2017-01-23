@@ -112,7 +112,7 @@ test:
     command: phpcs --standard=Framgia --report-checkstyle=.framgia-ci-reports/phpcs.xml app
   phpunit:
     command:
-      - sleep 30
+      - framgia-ci test-connect 127.0.0.1 3306
       - php artisan migrate --database=mysql_test
       - php -dzend_extension=xdebug.so vendor/bin/phpunit
         --coverage-clover=.framgia-ci-reports/coverage-clover.xml
