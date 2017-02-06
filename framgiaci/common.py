@@ -105,6 +105,7 @@ def call_api(url, is_post=False, params={}, headers=[]):
     buffer = BytesIO()
     c = pycurl.Curl()
     c.setopt(c.URL, url)
+    c.setopt(c.FOLLOWLOCATION, True)
     c.setopt(c.WRITEDATA, buffer)
     if is_post:
         postfields = json.dumps(params)

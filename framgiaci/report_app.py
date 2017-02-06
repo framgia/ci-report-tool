@@ -34,7 +34,7 @@ class ReportApplication(Application):
         else:
             self.ci_reports = self.parse_ci_config()
             if 'url' not in self.ci_reports:
-                self.ci_reports['url'] = 'http://ci-reports.framgia.vn'
+                self.ci_reports['url'] = 'https://ci-reports.framgia.vn'
 
     def parse_ci_config(self):
         raw = read_yaml_file(self.configure_file_name)
