@@ -15,20 +15,20 @@
 - For running inside **Docker Container**, which does not contain Python in almost cases
 ```
 // Using curl
-curl -o /usr/bin/framgia-ci https://raw.githubusercontent.com/framgia/ci-report-tool/master/dist/framgia-ci && chmod +x /usr/bin/framgia-ci
+# curl -o /usr/bin/framgia-ci https://raw.githubusercontent.com/framgia/ci-report-tool/master/dist/framgia-ci && chmod +x /usr/bin/framgia-ci
 
 // Using wget
-wget -O /usr/bin/framgia-ci https://raw.githubusercontent.com/framgia/ci-report-tool/master/dist/framgia-ci && chmod +x /usr/bin/framgia-ci
+# wget -O /usr/bin/framgia-ci https://raw.githubusercontent.com/framgia/ci-report-tool/master/dist/framgia-ci && chmod +x /usr/bin/framgia-ci
 ```
 #### Install by using `pip`
 - Requirement: **python 3.5**
 - Command:
 ```
 // Install
-pip install framgia-ci
+# pip install framgia-ci
 
 // Update
-pip install --upgrade framgia-ci
+# pip install --upgrade framgia-ci
 ```
 
 ### Mac OS
@@ -37,13 +37,13 @@ pip install --upgrade framgia-ci
 - Command:
 ```
 // Install python3
-brew install python3
+$ brew install python3
 
 // Install framgia-ci
-pip3 install framgia-ci
+# pip3 install framgia-ci
 
 // Update
-pip3 install --upgrade framgia-ci
+# pip3 install --upgrade framgia-ci
 ```
 
 ## Usage
@@ -54,7 +54,8 @@ finish        Running finish command tools
 init          Init new config file base-ed on template. Supported project type: php, ruby, android
 report        Running report command to send copying request to CI Report service
 notify        Running notify command to send notify request to CI Report service
-run           Running test, report, finish command
+upload        Running upload command to send zipped bundle reports to CI Report service
+run           Running test, upload, finish command
 run --local   Running test, finish command. For running at local machine
 show-config   Display current config
 test          Running test tools
@@ -69,7 +70,7 @@ framgia-ci init php
 // Run test commands defined in .framgia-ci.yml
 framgia-ci test
 
-// Run all test, report, finish commands. This should only be run inside framgia ci service
+// Run all test, upload, finish commands. This should only be run inside framgia ci service
 framgia-ci run
 
 // Run test and show results at local machine
