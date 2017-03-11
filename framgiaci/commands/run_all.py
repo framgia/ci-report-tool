@@ -14,9 +14,9 @@ class RunAllCommand(Command):
 
     def handle(self):
         self.app.check_configure_file_exists()
-        commands = ['test', 'report', 'finish']
+        commands = ['test', 'upload', 'finish']
         if self.option('local'):
-            commands.remove('report')
+            commands.remove('upload')
         for command in commands:
             try:
                 self.call(command)
