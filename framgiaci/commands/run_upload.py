@@ -28,15 +28,22 @@ class RunUploadCommand(Command):
     def handle(self):
         print_header('Build and upload reports')
         base_api_url = self.app.ci_reports['url'] + '/api/reports'
-        # base_api_url = 'localhost:12345'
         params = build_params()
         params['project_type'] = self.app.ci_reports['project_type'] if 'project_type' in self.app.ci_reports else None
         params['test_result'] = read_results(self.app.temp_file_name)
 
         self.build_zip_file(params)
 
-        call_api(base_api_url, True, params, [], [('report_file', 'bundle_reports.zip')])
-        print('[+] Finish upload')
+        print('[+] Bundle Size: %s bytes' % os.stat('bundle_reports.zip').st_size)
+
+        bundle = zipfile.ZipFile('bundle_reports.zip', 'r')
+        print('[+] Bundle Content:')
+        for file in bundle.namelist():
+            print('[?]', file)
+        bundle.close()
+
+        result = call_api(base_api_url, True, params, [], [('report_file', 'bundle_reports.zip')])
+        print('[+] Finish upload with result: ', result)
 
 
     def zipdir(self, path, ziph):
