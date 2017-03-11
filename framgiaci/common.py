@@ -101,15 +101,21 @@ def build_params():
         }
     }
 
-def call_api(url, is_post=False, params={}, headers=[]):
+def call_api(url, is_post=False, params={}, headers=[], files=[]):
     buffer = BytesIO()
     c = pycurl.Curl()
     c.setopt(c.URL, url)
     c.setopt(c.FOLLOWLOCATION, True)
     c.setopt(c.WRITEDATA, buffer)
     if is_post:
-        postfields = json.dumps(params)
-        c.setopt(c.POSTFIELDS, postfields)
+        postfields = []
+        for k,v in params.items():
+            postfields.append((k, json.dumps(v)))
+        if files != []:
+            for tag, file in files:
+                postfields.append((tag, (c.FORM_FILE, file)))
+        c.setopt(c.HTTPPOST, postfields)
+
     if headers != []:
         c.setopt(c.HTTPHEADER, headers)
 

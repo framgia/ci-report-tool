@@ -13,6 +13,7 @@ from framgiaci.commands.check_config import CheckConfigCommand
 from framgiaci.commands.show_config import ShowConfigCommand
 from framgiaci.commands.run_notify import RunNotifyCommand
 from framgiaci.commands.test_connect import TestConnectCommand
+from framgiaci.commands.run_upload import RunUploadCommand
 
 YAML_CONFIGURE_FILE = '.framgia-ci.yml'
 RESULT_TEMP_FILE = '.framgia-ci-result.temp.yml'
@@ -20,7 +21,7 @@ RESULT_TEMP_FILE = '.framgia-ci-result.temp.yml'
 COMMANDS = [
     RunTestCommand, RunReportCommand, RunFinishCommand, InitTemplateCommand,
     CheckConfigCommand, ShowConfigCommand, RunAllCommand, RunNotifyCommand,
-    TestConnectCommand
+    TestConnectCommand, RunUploadCommand
 ]
 
 def main():
