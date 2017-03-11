@@ -80,7 +80,7 @@ class RunUploadCommand(Command):
 
         files_list = list(set(files_list))
 
-        bundle_zip = zipfile.ZipFile('bundle_reports.zip', 'w')
+        bundle_zip = zipfile.ZipFile('bundle_reports.zip', 'w', compression=zipfile.ZIP_LZMA)
         for file in files_list:
             full_path = os.path.join(os.getcwd(), file)
             try:
