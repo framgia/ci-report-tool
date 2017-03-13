@@ -132,12 +132,13 @@ class RunUploadCommand(Command):
                     tag = 'file'
 
                 fixed_path = child.attrib[tag]
-                # iOS work around
-                if 'swift-lint.xml' in xml_file:
+                # iOS and Android work around
+                if 'swift-lint.xml' in xml_file or 'android_lint.xml' in xml_file:
                     repo = params['repo']['name']
                     fixed_path = fixed_path.split(repo)[-1][1:]
+                    child.set(tag, fixed_path)
                     updated = True
-                elif os.path.isabs(fixed_path):
+                elif fixed_path[0] == "/":
                     fixed_path = os.path.relpath(fixed_path, cwd)
                     child.set(tag, fixed_path)
                     updated = True
